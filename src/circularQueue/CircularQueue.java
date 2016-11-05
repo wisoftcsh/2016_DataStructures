@@ -8,14 +8,24 @@ public class CircularQueue {
 
     CircularQueue(int queueSize) {
         queueArray = new Data[queueSize];
-        front = -1;
+        front = 0;
         rear = -1;
         currentCount = 0;
     }
 
+    public void assignmentQueue() {
+        Data tmpQueue[] = new Data[queueArray.length * 2];
+        for (int i = front, j = 0; i < front + currentCount; i++) {
+            tmpQueue[j++] = queueArray[i % queueArray.length];
+        }
+        front = 0;
+        rear = queueArray.length - 1;
+        queueArray = tmpQueue;
+    }
+
     public void enQueue(Data data) {
         if (isFull()) {
-            return;
+            assignmentQueue();
         }
         rear = (rear + 1) % queueArray.length;
         queueArray[rear] = data;
@@ -26,28 +36,28 @@ public class CircularQueue {
         if (isEmpty()) {
             return null;
         }
-        front = (front + 1) % queueArray.length;
         Data tmpData = queueArray[front];
         queueArray[front] = null;
+        front = (front + 1) % queueArray.length;
         currentCount--;
         return tmpData;
     }
 
     public Data peek() {
-        if(isEmpty()){
+        if (isEmpty()) {
             return null;
         }
-        return queueArray[front + 1];
+        return queueArray[front];
     }
 
     public void printQueue() {
-        int tmpFront = front;
         System.out.println("------------------------------ Queue ------------------------------");
-        while (tmpFront != rear) {
-            tmpFront = (tmpFront + 1) % queueArray.length;
-            System.out.print(queueArray[tmpFront] + " ");
+        for (int i = front; i < front + currentCount; i++) {
+            System.out.print(queueArray[i % queueArray.length] + " ");
         }
         System.out.println();
+        System.out.println("r = " + rear);
+        System.out.println("f = " + front);
         System.out.println("--------------------------------------------------------------------");
     }
 
