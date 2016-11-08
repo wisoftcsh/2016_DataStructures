@@ -6,7 +6,7 @@ public class CircularQueue {
     int front;
     int rear;
 
-    CircularQueue(int queueSize) {
+    public CircularQueue(int queueSize) {
         queueArray = new Data[queueSize];
         front = 0;
         rear = -1;
