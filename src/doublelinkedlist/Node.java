@@ -5,34 +5,34 @@ package doublelinkedlist;
  */
 public class Node {
     private Data data;
-    private Node prePointer;
-    private Node nextPointer;
+    private Node pre;
+    private Node next;
 
     Node() { // 더미노드
         this.data = null;
-        this.nextPointer = null;
-        this.prePointer = null;
+        this.next = null;
+        this.pre = null;
     }
 
     Node(String name, String eMail) {
         this.data = new Data(name, eMail);
-        this.nextPointer = null;
+        this.next = null;
     }
 
-    public void setPrePointer(Node prePointer) {
-        this.prePointer = prePointer;
+    public void setPre(Node pre) {
+        this.pre = pre;
     }
 
-    public void setNextPointer(Node nextPointer) {
-        this.nextPointer = nextPointer;
+    public void setNext(Node next) {
+        this.next = next;
     }
 
-    public Node getPrePointer() {
-        return prePointer;
+    public Node getPre() {
+        return pre;
     }
 
-    public Node getNextPointer() {
-        return nextPointer;
+    public Node getNext() {
+        return next;
     }
 
     public Data getData() {

@@ -15,11 +15,11 @@ public class DoubleLinkedList {
     }
 
     public void addData(Node nextNode) {
-        tail.setNextPointer(nextNode);
-        nextNode.setPrePointer(tail);
-        nextNode.setNextPointer(header);
-        header.setPrePointer(nextNode);
-        tail = tail.getNextPointer();
+        tail.setNext(nextNode);
+        nextNode.setPre(tail);
+        nextNode.setNext(header);
+        header.setPre(nextNode);
+        tail = tail.getNext();
         curentCount++;
     }
 
@@ -30,13 +30,13 @@ public class DoubleLinkedList {
         }
         preNode = header;
         for (int i = 0; i < index; i++) { // 저장할 노드 위치 이전 노드로 이동
-            preNode = preNode.getNextPointer();
+            preNode = preNode.getNext();
         }
 
-        nextNode.setNextPointer(preNode.getNextPointer());
-        nextNode.setPrePointer(preNode.getNextPointer().getPrePointer());
-        preNode.getNextPointer().setPrePointer(nextNode);
-        preNode.setNextPointer(nextNode);
+        nextNode.setNext(preNode.getNext());
+        nextNode.setPre(preNode.getNext().getPre());
+        preNode.getNext().setPre(nextNode);
+        preNode.setNext(nextNode);
         curentCount++;
     }
 
@@ -47,14 +47,14 @@ public class DoubleLinkedList {
         }
         preNode = header;
         for (int i = 0; i < index; i++) {
-            preNode = preNode.getNextPointer();
+            preNode = preNode.getNext();
         }
-        delNode = preNode.getNextPointer();
-        preNode.setNextPointer(delNode.getNextPointer());
-        delNode.getNextPointer().setPrePointer(preNode);
+        delNode = preNode.getNext();
+        preNode.setNext(delNode.getNext());
+        delNode.getNext().setPre(preNode);
         // 대상 노드가 가르키는 다음 노드를 이전노드의 포인터에 저장
-        delNode.setNextPointer(null); // 메모리 반환? null을 입력하면 진짜 null?
-        delNode.setPrePointer(null);
+        delNode.setNext(null); // 메모리 반환? null을 입력하면 진짜 null?
+        delNode.setPre(null);
         if(index == curentCount -1){
             tail = preNode;
         }
@@ -63,11 +63,11 @@ public class DoubleLinkedList {
 
     public void concatList(DoubleLinkedList list, DoubleLinkedList nextList) { //nextList 이름이 좀 부정확.. 어울리는 거 없나요?
         if (list != null && nextList != null) {
-            tail.setNextPointer(nextList.header.getNextPointer());
-            nextList.header.getNextPointer().setPrePointer(tail);
+            tail.setNext(nextList.header.getNext());
+            nextList.header.getNext().setPre(tail);
             curentCount = curentCount + nextList.getCurentCount();
-            nextList.header.setNextPointer(null);
-            nextList.header.setPrePointer(null);
+            nextList.header.setNext(null);
+            nextList.header.setPre(null);
         }
     }
 
@@ -75,7 +75,7 @@ public class DoubleLinkedList {
         preNode = header;
         System.out.println("------------------------------------");
         for (int i = 0; i < curentCount; i++) {
-            preNode = preNode.getNextPointer();
+            preNode = preNode.getNext();
             System.out.println(preNode.getData().toString());
         }
     }
@@ -85,7 +85,7 @@ public class DoubleLinkedList {
     public void getData(int index) {
         preNode = header;
         for (int i = 0; i <= index; i++) {
-            preNode = preNode.getNextPointer();
+            preNode = preNode.getNext();
         }
         System.out.println("\n검색 결과 --> " + preNode.getData().toString() + "\n"); //Node 클래스의 getData
     }
