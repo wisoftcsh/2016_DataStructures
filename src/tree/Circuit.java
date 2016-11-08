@@ -41,18 +41,17 @@ public class Circuit {
         circularQueue.enQueue(node);
         while (circularQueue.currentCount != 0) {
             Node tmpNode = circularQueue.deQueue();
+            System.out.print(tmpNode.getData().toString() + " ");
             if (tmpNode.getLeftNode() == null && tmpNode.getRightNode() == null) {
-                System.out.print(tmpNode.getData().toString() + " ");
-                while(circularQueue.currentCount != 0){
-                    System.out.print(circularQueue.deQueue().getData().toString()+ " ");
+                while (circularQueue.currentCount != 0) {
+                    System.out.print(circularQueue.deQueue().getData().toString() + " ");
                 }
                 return;
             }
-            System.out.print(tmpNode.getData().toString() + " ");
-            if (tmpNode.getLeftNode() != null){
+            if (tmpNode.getLeftNode() != null) {
                 circularQueue.enQueue(tmpNode.getLeftNode());
             }
-            if(tmpNode.getRightNode() != null){
+            if (tmpNode.getRightNode() != null) {
                 circularQueue.enQueue(tmpNode.getRightNode());
             }
         }
