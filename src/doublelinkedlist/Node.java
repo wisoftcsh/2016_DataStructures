@@ -14,8 +14,8 @@ public class Node {
         this.pre = null;
     }
 
-    Node(String name, String eMail) {
-        this.data = new Data(name, eMail);
+    Node(Data data) {
+        this.data = data;
         this.next = null;
     }
 
