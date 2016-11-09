@@ -24,19 +24,19 @@ public class CircularQueue {
         System.out.println("--------------------------------------------------------------------");
     }
 
-//    public void assignmentQueue() {
-//        Data tmpQueue[] = new Data[queueArray.length * 2];
-//        for (int i = front, j = 0; i < front + currentCount; i++) {
-//            tmpQueue[j++] = queueArray[i % queueArray.length];
-//        }
-//        front = 0;
-//        rear = queueArray.length - 1;
-//        queueArray = tmpQueue;
-//    }
+    public void assignmentQueue() {
+        Node tmpQueue[] = new Node[queueArray.length * 2];
+        for (int i = front, j = 0; i < front + currentCount; i++) {
+            tmpQueue[j++] = queueArray[i % queueArray.length];
+        }
+        front = 0;
+        rear = queueArray.length - 1;
+        queueArray = tmpQueue;
+    }
 
     public void enQueue(Node node) {
         if (isFull()) {
-//            assignmentQueue();
+            assignmentQueue();
             return;
         }
         rear = (rear + 1) % queueArray.length;
