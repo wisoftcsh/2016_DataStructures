@@ -13,7 +13,7 @@ public class CircularQueue {
         currentCount = 0;
     }
 
-    public void assignmentQueue() {
+    private void assignmentQueue() {
         Data tmpQueue[] = new Data[queueArray.length * 2];
         for (int i = front, j = 0; i < front + currentCount; i++) {
             tmpQueue[j++] = queueArray[i % queueArray.length];
