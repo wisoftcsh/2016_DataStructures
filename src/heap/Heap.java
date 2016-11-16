@@ -14,17 +14,18 @@ public class Heap {
         currentCount = 0;
     }
 
-    public void insetHeap(Data data) {
+    public void insertHeap(Data data) {
         if (isFull()) {
             System.out.println("Heap is full !");
             return;
         }
-        int tmp;
         currentCount++;
+        heapArray[currentCount] = data;
+        int tmp;
         tmp = currentCount;
-        while (tmp != 1 && Integer.parseInt(data.getData().toString()) >
-                Integer.parseInt(heapArray[tmp / 2].getData().toString())) {
+        while (tmp != 1 && compare(tmp, tmp / 2) > 0) {
             heapArray[tmp] = heapArray[tmp / 2];
+            heapArray[tmp / 2] = data;
             tmp /= 2;
         }
         heapArray[tmp] = data;
@@ -37,17 +38,14 @@ public class Heap {
         }
         Data rootData = heapArray[1];
         Data tmpData = heapArray[currentCount];
-        heapArray[currentCount] = null;
         currentCount--;
 
         while (child <= currentCount) {
             if (child < currentCount && // 오른쪽 노드의 존재 여부
-                    Integer.parseInt(heapArray[child].getData().toString()) <
-                            Integer.parseInt(heapArray[child + 1].getData().toString())) { // 자식 노드끼리 비교
+                    compare(child, child + 1) < 0) {
                 child++;
             }
-            if(Integer.parseInt(tmpData.getData().toString()) >=
-                    Integer.parseInt(heapArray[child].getData().toString())) { // 탈출 조건
+            if (compare(currentCount + 1, child) >= 0) {
                 break;
             }
             heapArray[parent] = heapArray[child];
@@ -58,13 +56,33 @@ public class Heap {
         return rootData;
     }
 
-    public void heapSort(){
-        CircularQueue circularQueue = new CircularQueue(10);
-        while(currentCount != 0){
-            circularQueue.enQueue(removeHeap());
+    public void heapSort() {
+        while (!isEmpty()) {
+            heapArray[currentCount] = removeHeap();
         }
-        while(!circularQueue.isEmpty()){
-            insetHeap(circularQueue.deQueue());
+    }
+
+    public int compare(int first, int second) {
+        if (isNumber(heapArray[first].getData().toString()) && isNumber(heapArray[second].getData().toString())) {
+            if (Integer.parseInt(heapArray[first].getData().toString()) >
+                    Integer.parseInt(heapArray[second].getData().toString())) {
+                return 1;
+            } else if (Integer.parseInt(heapArray[first].getData().toString()) ==
+                    Integer.parseInt(heapArray[second].getData().toString())) {
+                return 0;
+            } else {
+                return -1;
+            }
+        }
+        return heapArray[first].getData().toString().compareTo(heapArray[second].getData().toString());
+    }
+
+    public boolean isNumber(String string) {
+        try {
+            Double.parseDouble(string);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 
@@ -77,9 +95,9 @@ public class Heap {
     }
 
     public void printAll() {
-        System.out.println("                    " + heapArray[1]);
-        System.out.println("           " + heapArray[2] + "                " + heapArray[3]);
-        System.out.println("      " + heapArray[4] + "       " + heapArray[5] + "        " + heapArray[6] + "        " + heapArray[7]);
-        System.out.println("   " + heapArray[8] + "    " + heapArray[9] + "   " + heapArray[10] + "   " + heapArray[11] + "   " + heapArray[12] + "   " + heapArray[13] + "   " + heapArray[14] + "   " + heapArray[15]);
+        for (int i = 1; i < currentCount + 1; i++) {
+            System.out.print(heapArray[i] + " ");
+        }
+        System.out.println();
     }
 }
