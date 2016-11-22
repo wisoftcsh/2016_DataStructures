@@ -57,9 +57,11 @@ public class Heap {
     }
 
     public void heapSort() {
+        int count = currentCount;
         while (!isEmpty()) {
             heapArray[currentCount] = removeHeap();
         }
+        currentCount = count;
     }
 
     public int compare(int first, int second) {
