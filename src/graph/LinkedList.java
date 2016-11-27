@@ -30,23 +30,23 @@ public class LinkedList {
         }
         while(preNode.getNextNode() != null){
             if(preNode.getNextNode().getData().toString().equals(data.toString())){ //toString 이 있고 없고의 차이???????
+                delNode = preNode.getNextNode();
+                preNode.setNextNode(delNode.getNextNode());
+                delNode.setNextNode(null);
+
+                Node tailNode = header; // tail 재설정 부분 줄일수 없나?
+                while (tailNode.getNextNode() != null){
+                    tailNode = tailNode.getNextNode();
+                }
+                tail = tailNode;
                 break;
             }
             preNode = preNode.getNextNode();
         }
-        delNode = preNode.getNextNode();
-        preNode.setNextNode(delNode.getNextNode());
-        delNode.setNextNode(null);
-
-        Node tailNode = header; // tail 재설정 부분 줄일수 없나?
-        while (tailNode.getNextNode() != null){
-            tailNode = tailNode.getNextNode();
-        }
-        tail = tailNode;
     }
 
-    public Data getGraphData(){
-        return header.getData();
+    public Node getHeaderNode(){
+        return header;
     }
 
     public void check(Data data){

@@ -6,6 +6,7 @@ package graph;
 public class Node {
     private Data data;
     private Node nextNode;
+    private boolean searchFlag = false;
 
     public Node(Data data) {
         this.data = data;
@@ -22,5 +23,13 @@ public class Node {
 
     public Node getNextNode() {
         return nextNode;
+    }
+
+    public boolean getSearchFlag(){
+        return searchFlag;
+    }
+
+    public void setSearchFlag(boolean searchFlag){
+        this.searchFlag = searchFlag;
     }
 }

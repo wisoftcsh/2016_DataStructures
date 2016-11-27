@@ -1,7 +1,4 @@
 package graph;
-
-import java.util.HashMap;
-
 /**
  * Created by csh9196 on 2016-11-22.
  */
@@ -31,7 +28,7 @@ public class Graph {
         String tmpFrom = from+""; // format 형식 맞추기
         String tmpTo = to+"";
         for(int i = 0 ; i < linkedList.length ; i++){
-            if(linkedList[i].getGraphData().toString().equals(tmpFrom)){ //toString을 안쓰면 왜 안돌아 갈까??
+            if(linkedList[i].getHeaderNode().getData().toString().equals(tmpFrom)){ // toString을 안쓰면 왜 안돌아 갈까??
                 linkedList[i].addData(new Node(new Data(tmpTo)));
                 break;
             }
@@ -42,7 +39,7 @@ public class Graph {
         String tmpFrom = from+""; // format 형식 맞추기
         String tmpTo = to+"";
         for(int i = 0 ; i < linkedList.length ; i++){
-            if(linkedList[i].getGraphData().toString().equals(tmpFrom)){
+            if(linkedList[i].getHeaderNode().getData().toString().equals(tmpFrom)){
                 linkedList[i].removeData(new Data(tmpTo));
                 break;
             }
@@ -52,9 +49,23 @@ public class Graph {
     public void printAll(){
         System.out.println("---------------- 그래프 정보 ----------------");
         for(int i = 0 ; i < linkedList.length ; i++){
-            System.out.print(linkedList[i].getGraphData() + " : ");
+            System.out.print(linkedList[i].getHeaderNode().getData() + " : ");
             linkedList[i].printAll();
             System.out.println();
+        }
+    }
+
+    public LinkedList[] getLinkedList(){
+        return linkedList;
+    }
+
+    public void initPlag(){
+        for(int i = 0 ; i< linkedList.length ; i++){
+            Node tmp = linkedList[i].getHeaderNode();
+            while(tmp != null){
+                tmp.setSearchFlag(false);
+                tmp = tmp.getNextNode();
+            }
         }
     }
 }
