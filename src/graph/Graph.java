@@ -59,7 +59,7 @@ public class Graph {
         return linkedList;
     }
 
-    public void initPlag(){
+    public void initFlag(){
         for(int i = 0 ; i< linkedList.length ; i++){
             Node tmp = linkedList[i].getHeaderNode();
             while(tmp != null){

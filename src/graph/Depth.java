@@ -12,26 +12,26 @@ public class Depth {
     }
 
     public void search(int index){
-        depthFistSearch(index);
+        depthFirstSearch(index);
         for(int i = 0 ; i < linkedList.length ; i++){ //혹시 정보가 없는 노드가 있다면
             if(!linkedList[i].getHeaderNode().getSearchFlag()){ // == false
-                depthFistSearch(i);
+                depthFirstSearch(i);
             }
         }
     }
 
-    public void depthFistSearch(int index) {
+    public void depthFirstSearch(int index) {
         if (index == -1) {
             System.out.println("인덱스 오류");
             return;
         }
         Node tmpNode;
         tmpNode = linkedList[index].getHeaderNode();
-        if (tmpNode.getNextNode() == null) {
+        if (tmpNode.getNextNode() == null) { // 간선이 없는 노드 처리
             System.out.println(linkedList[index].getHeaderNode().getData() + " 를 방문");
             linkedList[index].getHeaderNode().setSearchFlag(true);
             index++;
-            depthFistSearch(index % linkedList.length);
+            depthFirstSearch(index % linkedList.length);
             return;
         }
         while (tmpNode.getNextNode() != null) {
@@ -45,11 +45,11 @@ public class Depth {
                 linkedList[index].getHeaderNode().setSearchFlag(true);
                 String tmpString = tmpNode.getData().toString();
                 index = searchIndex(tmpString);
-                depthFistSearch(index % linkedList.length);
+                depthFirstSearch(index % linkedList.length);
             }else {
                 String tmpString = tmpNode.getData().toString();
                 index = searchIndex(tmpString);
-                depthFistSearch(index % linkedList.length);
+                depthFirstSearch(index % linkedList.length);
             }
         }
     }

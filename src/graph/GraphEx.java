@@ -38,7 +38,7 @@ public class GraphEx {
         System.out.println("=================== 깊이 ===================");
         depth.search(3);
         System.out.println("============================================");
-        graph.initPlag();
+        graph.initFlag();
 
 
         Breadth breadth = new Breadth(graph);
